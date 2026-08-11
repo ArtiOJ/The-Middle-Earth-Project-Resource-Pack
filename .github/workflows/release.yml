@@ -20,7 +20,7 @@ jobs:
       - name: Create installable resource-pack ZIP
         run: |
           cd "The Middle Earth Project"
-          zip -r "The-Middle_Earth-Project.zip" \
+          zip -r "../The-Middle_Earth-Project.zip" \
             assets \
             pack.mcmeta \
             pack.png
