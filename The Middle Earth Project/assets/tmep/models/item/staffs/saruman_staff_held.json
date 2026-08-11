@@ -12,7 +12,6 @@
 			"from": [7.5, -16, 7.5],
 			"to": [8.5, 15, 8.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 6.5]},
-			"color": 7,
 			"faces": {
 				"north": {"uv": [0.25, 0, 0.5, 4], "texture": "#0"},
 				"east": {"uv": [0, 0, 0.25, 4], "texture": "#0"},
@@ -102,6 +101,11 @@
 		},
 		"head": {
 			"translation": [0, 7.5, 0]
+		},
+		"fixed": {
+			"rotation": [-180, 90, -180],
+			"translation": [0, 3.5, -0.25],
+			"scale": [0.6, 0.6, 0.6]
 		}
 	},
 	"groups": [

@@ -37,9 +37,9 @@
 		},
 		{
 			"name": "orb",
-			"from": [6.25, 16.25531, 10.14628],
-			"to": [8.25, 19.25531, 12.14628],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [6.875, 9.75, 13.5]},
+			"from": [7, 16.25531, 10.14628],
+			"to": [9, 19.25531, 12.14628],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [7.625, 9.75, 13.5]},
 			"faces": {
 				"north": {"uv": [7.5, 0, 8.5, 1.5], "texture": "#0"},
 				"east": {"uv": [7.5, 1.5, 8.5, 3], "texture": "#0"},
@@ -66,30 +66,35 @@
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [0, 180, 0],
+			"rotation": [0, -180, 0],
 			"translation": [0, 2.5, 0]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [0, 180, 0],
+			"rotation": [0, -180, 0],
 			"translation": [0, 2.5, 0]
 		},
 		"firstperson_righthand": {
-			"rotation": [-6.75, 180, 6.5],
+			"rotation": [-6.75, -180, 6.5],
 			"translation": [1, 1.75, 0],
 			"scale": [0.8, 0.8, 0.8]
 		},
 		"firstperson_lefthand": {
-			"rotation": [-6.75, 180, 6.5],
+			"rotation": [-6.75, -180, 6.5],
 			"translation": [1, 1.75, 0],
 			"scale": [0.8, 0.8, 0.8]
 		},
 		"ground": {
-			"rotation": [30, 180, 85],
+			"rotation": [30, -180, 85],
 			"translation": [0, 3, 0]
 		},
 		"head": {
-			"rotation": [0, 180, 0],
+			"rotation": [0, -180, 0],
 			"translation": [0, 7.5, 0]
+		},
+		"fixed": {
+			"rotation": [-180, 90, -180],
+			"translation": [0, 3.5, -0.25],
+			"scale": [0.6, 0.6, 0.6]
 		}
 	},
 	"groups": [
