@@ -165,8 +165,11 @@
       }
     ],
     "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/pufferfish"
+      "type": "minecraft:special",
+      "base": "minecraft:item/shield",
+      "model": {
+        "type": "minecraft:shield"
+      }
     }
   }
 }

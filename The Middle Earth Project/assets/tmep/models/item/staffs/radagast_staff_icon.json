@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tmep:item/staffs/radagast_staff_icon"
+  }
+}	
