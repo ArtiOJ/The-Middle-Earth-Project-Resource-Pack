@@ -5,6 +5,8 @@
 Made by **somerandomlima**  
 License: **CC BY-NC-SA 4.0**
 
+[Releases](https://github.com/loseAlotL/The-Middle-Earth-Project-Resource-Pack/releases)
+
 Example command:
 ```mcfunction
 /give @s minecraft:gold_nugget[minecraft:custom_model_data={strings:["tmep:one_ring"]}]
