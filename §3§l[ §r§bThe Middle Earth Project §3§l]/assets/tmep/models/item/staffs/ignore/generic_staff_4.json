@@ -1,0 +1,99 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"elements": [
+		{
+			"name": "reference",
+			"from": [7.5, -16, 7.5],
+			"to": [8.5, 15, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 6.5]},
+			"color": 7,
+			"faces": {
+				"north": {"uv": [1, 0, 2, 16], "texture": "#missing"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#missing"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#missing"},
+				"west": {"uv": [1, 0, 2, 16], "texture": "#missing"},
+				"up": {"uv": [0, 1, 1, 2], "texture": "#missing"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "shaft",
+			"from": [7.5, -16, 7.5],
+			"to": [8.5, 15, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 6.5]},
+			"color": 7,
+			"faces": {
+				"north": {"uv": [1, 0, 2, 16], "texture": "#missing"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#missing"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#missing"},
+				"west": {"uv": [1, 0, 2, 16], "texture": "#missing"},
+				"up": {"uv": [0, 1, 1, 2], "texture": "#missing"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "shaft",
+			"from": [7.25, 1, 7.25],
+			"to": [8.75, 9, 8.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 2, 6.25]},
+			"color": 7,
+			"faces": {
+				"north": {"uv": [0.75, 4, 2.25, 12], "texture": "#missing"},
+				"east": {"uv": [0, 4, 1.5, 12], "texture": "#missing"},
+				"south": {"uv": [0, 4, 1.5, 12], "texture": "#missing"},
+				"west": {"uv": [1, 4, 2.5, 12], "texture": "#missing"},
+				"up": {"uv": [0, 1, 1.5, 2.5], "texture": "#missing"},
+				"down": {"uv": [0, 0, 1.5, 1.5], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "1plane",
+			"from": [8, 11, 3],
+			"to": [8, 22, 13],
+			"rotation": {"angle": -10, "axis": "y", "origin": [8, 16.5, 8]},
+			"color": 2,
+			"faces": {
+				"north": {"uv": [2, 2, 2, 13], "texture": "#missing"},
+				"east": {"uv": [0, 2, 10, 13], "texture": "#missing"},
+				"south": {"uv": [2, 2, 2, 13], "texture": "#missing"},
+				"west": {"uv": [0, 2, 10, 13], "texture": "#missing"},
+				"up": {"uv": [2, 0, 2, 10], "texture": "#missing"},
+				"down": {"uv": [2, 0, 2, 10], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "2plane",
+			"from": [8, 11, 3],
+			"to": [8, 22, 13],
+			"rotation": {"angle": 10, "axis": "y", "origin": [8, 16.5, 8]},
+			"color": 2,
+			"faces": {
+				"north": {"uv": [2, 2, 2, 13], "texture": "#missing"},
+				"east": {"uv": [0, 2, 10, 13], "texture": "#missing"},
+				"south": {"uv": [2, 2, 2, 13], "texture": "#missing"},
+				"west": {"uv": [0, 2, 10, 13], "texture": "#missing"},
+				"up": {"uv": [2, 0, 2, 10], "texture": "#missing"},
+				"down": {"uv": [2, 0, 2, 10], "texture": "#missing"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "generic_4_staff",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				0,
+				{
+					"name": "staff",
+					"origin": [8, 8, 8],
+					"scope": 0,
+					"color": 0,
+					"children": [1, 2, 3, 4]
+				}
+			]
+		}
+	]
+}

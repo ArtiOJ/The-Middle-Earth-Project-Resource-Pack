@@ -1,0 +1,112 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "tmep:item/staffs/radagast_staff_held",
+		"particle": "tmep:item/staffs/radagast_staff_held"
+	},
+	"elements": [
+		{
+			"name": "shaft",
+			"from": [7.5, -16, 7.5],
+			"to": [8.5, 15, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.625, 8, 6.75]},
+			"faces": {
+				"north": {"uv": [5.5, 0, 6, 15.5], "texture": "#0"},
+				"east": {"uv": [6, 0, 6.5, 15.5], "texture": "#0"},
+				"south": {"uv": [6.5, 0, 7, 15.5], "texture": "#0"},
+				"west": {"uv": [7, 0, 7.5, 15.5], "texture": "#0"},
+				"up": {"uv": [9, 2.5, 8.5, 2], "texture": "#0"},
+				"down": {"uv": [9, 2.5, 8.5, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "shaft",
+			"from": [7.75, 14.86161, 5.6205],
+			"to": [8.75, 18.86161, 6.1205],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8.625, 9.75, 2.75]},
+			"faces": {
+				"north": {"uv": [7.5, 6, 8, 8], "texture": "#0"},
+				"east": {"uv": [8, 6, 8.5, 8], "texture": "#0"},
+				"south": {"uv": [7.5, 8, 8, 10], "texture": "#0"},
+				"west": {"uv": [8, 8, 8.5, 10], "texture": "#0"},
+				"up": {"uv": [9, 3.5, 8.5, 3], "texture": "#0"},
+				"down": {"uv": [9, 3.5, 8.5, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "orb",
+			"from": [6.25, 16.25531, 10.14628],
+			"to": [8.25, 19.25531, 12.14628],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [6.875, 9.75, 13.5]},
+			"faces": {
+				"north": {"uv": [7.5, 0, 8.5, 1.5], "texture": "#0"},
+				"east": {"uv": [7.5, 1.5, 8.5, 3], "texture": "#0"},
+				"south": {"uv": [7.5, 3, 8.5, 4.5], "texture": "#0"},
+				"west": {"uv": [7.5, 4.5, 8.5, 6], "texture": "#0"},
+				"up": {"uv": [9.5, 1, 8.5, 0], "texture": "#0"},
+				"down": {"uv": [9.5, 1, 8.5, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "nsplane",
+			"from": [8, 11, 0],
+			"to": [8, 22, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.625, 8, 6.75]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 5.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 5.5, 5.5], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 5.5], "texture": "#0"},
+				"west": {"uv": [0, 5.5, 5.5, 11], "texture": "#0"},
+				"up": {"uv": [0, 5.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 5.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 2.5, 0]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 2.5, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [-6.75, 180, 6.5],
+			"translation": [1, 1.75, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-6.75, 180, 6.5],
+			"translation": [1, 1.75, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"ground": {
+			"rotation": [30, 180, 85],
+			"translation": [0, 3, 0]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 7.5, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "radagast_staff",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				{
+					"name": "staff",
+					"origin": [8, 8, 8],
+					"scope": 0,
+					"color": 0,
+					"children": [0, 1, 2, 3]
+				}
+			]
+		}
+	]
+}

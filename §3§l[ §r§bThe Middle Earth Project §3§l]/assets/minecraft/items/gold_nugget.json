@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "tmep:one_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/one_ring"
+        }
+      },
+	  {
+        "when": "tmep:lesser_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/one_ring"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/gold_nugget"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "tmep:man_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/man_ring"
+        }
+      },
+	  {
+        "when": "tmep:vilya_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/vilya_ring"
+        }
+      },
+	  {
+        "when": "tmep:nenya_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/nenya_ring"
+        }
+      },
+	  {
+        "when": "tmep:narya_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/narya_ring"
+        }
+      },
+	  {
+        "when": "tmep:dwarven_ring",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:item/rings/dwarven_ring"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/iron_nugget"
+    }
+  }
+}

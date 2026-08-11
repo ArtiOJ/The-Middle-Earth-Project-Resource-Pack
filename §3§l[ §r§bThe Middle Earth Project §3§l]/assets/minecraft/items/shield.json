@@ -1,0 +1,172 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "tmep:gandalf_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/gandalf_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/gandalf_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:saruman_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/saruman_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/saruman_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:radagast_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/radagast_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/radagast_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:generic_1_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/generic_1_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/generic_1_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:generic_2_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/generic_2_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/generic_2_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:generic_3_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/generic_3_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/generic_3_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:generic_4_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/generic_4_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/generic_4_staff_held"
+          }
+        }
+      },
+      {
+        "when": "tmep:generic_5_staff",
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/staffs/generic_5_staff_icon"
+        }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/staffs/generic_5_staff_held"
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/pufferfish"
+    }
+  }
+}
