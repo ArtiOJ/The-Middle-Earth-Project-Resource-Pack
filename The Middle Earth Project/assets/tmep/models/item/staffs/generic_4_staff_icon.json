@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "tmep:item/staffs/gandalf_staff_icon"
+    "layer0": "tmep:item/staffs/generic_staff_4_icon"
   }
 }	
