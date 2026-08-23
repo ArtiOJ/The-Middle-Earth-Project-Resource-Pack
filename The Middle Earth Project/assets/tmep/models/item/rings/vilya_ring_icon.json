@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tmep:item/rings/vilya_ring_icon"
+  }
+}	

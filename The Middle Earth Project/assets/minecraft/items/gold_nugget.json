@@ -6,15 +6,41 @@
       {
         "when": "tmep:one_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/one_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/one_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/one_ring_held"
+          }
         }
       },
-	  {
+      {
         "when": "tmep:lesser_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/one_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/one_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/one_ring_held"
+          }
         }
       }
     ],

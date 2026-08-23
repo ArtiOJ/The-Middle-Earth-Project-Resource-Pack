@@ -6,36 +6,101 @@
       {
         "when": "tmep:man_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/man_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/man_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/man_ring_held"
+          }
         }
       },
-	  {
+      {
         "when": "tmep:vilya_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/vilya_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/vilya_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/vilya_ring_held"
+          }
         }
       },
-	  {
+      {
         "when": "tmep:nenya_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/nenya_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/nenya_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/nenya_ring_held"
+          }
         }
       },
-	  {
+      {
         "when": "tmep:narya_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/narya_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/narya_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/narya_ring_held"
+          }
         }
       },
-	  {
+      {
         "when": "tmep:dwarven_ring",
         "model": {
-          "type": "minecraft:model",
-          "model": "tmep:item/rings/dwarven_ring"
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": "gui",
+              "model": {
+                "type": "minecraft:model",
+                "model": "tmep:item/rings/dwarven_ring_icon"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "tmep:item/rings/dwarven_ring_held"
+          }
         }
       }
     ],
