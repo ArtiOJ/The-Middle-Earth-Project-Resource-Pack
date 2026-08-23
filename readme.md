@@ -2,6 +2,9 @@
 
 # Custom Texture Pack for The Middle Earth Project
 
+### Tested on versions `1.21.9-26.2`
+(Optifine **NOT** required)
+
 Made by **somerandomlima**  
 License: **CC BY-NC-SA 4.0**
 
@@ -40,3 +43,11 @@ Example command:
 - Generic Staff 2 – `tmep:generic_2_staff`
 - Generic Staff 3 – `tmep:generic_3_staff`
 - Generic Staff 4 – `tmep:generic_4_staff`
+
+<img width="823" height="626" alt="image" src="https://github.com/user-attachments/assets/9a680391-a110-4085-9c4c-516115110633" />
+<img width="466" height="129" alt="image" src="https://github.com/user-attachments/assets/e38216c4-29d3-466e-b224-91c3febb8bed" />
+
+
+Current rings are from my other pack https://www.planetminecraft.com/texture-pack/lotring-pack/
+
+Hope to rework models and textures by `Release v1.0.6`
