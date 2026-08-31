@@ -153,13 +153,13 @@
               "when": "gui",
               "model": {
                 "type": "minecraft:model",
-                "model": "tmep:item/staffs/generic_5_staff_icon"
+                "model": "tmep:item/staffs/generic_4_staff_icon"
         }
             }
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "tmep:item/staffs/generic_5_staff_held"
+            "model": "tmep:item/staffs/generic_4_staff_held"
           }
         }
       }
