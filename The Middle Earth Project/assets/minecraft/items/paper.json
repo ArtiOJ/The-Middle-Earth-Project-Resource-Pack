@@ -1,0 +1,89 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "tmep:entity:cave_troll:head:head",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0head0head"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:body:body_top",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0body0body_top"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:body:body_bottom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0body0body_bottom"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:arm_left:arm_left_top",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0arm0arm_left0arm_left_top"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:arm_left:arm_left_bottom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0arm0arm_left0arm_left_bottom"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:arm_right:arm_right_top",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0arm0arm_right0arm_right_top"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:arm_right:arm_right_bottom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0arm0arm_right0arm_right_bottom"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:leg_left:leg_left_top",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0leg0leg_left0leg_left_top"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:leg_left:leg_left_bottom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0leg0leg_left0leg_left_bottom"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:leg_right:leg_right_top",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0leg0leg_right0leg_right_top"
+        }
+      },
+      {
+        "when": "tmep:entity:cave_troll:leg_right:leg_right_bottom",
+        "model": {
+          "type": "minecraft:model",
+          "model": "tmep:entity/cave_troll/cave_troll0leg0leg_right0leg_right_bottom"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/paper"
+    }
+  }
+}

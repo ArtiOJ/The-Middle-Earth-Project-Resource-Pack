@@ -1,0 +1,25 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "tmep:item/entity/cave_troll/cave_troll0leg0leg_right0leg_right_top",
+		"particle": "tmep:item/entity/cave_troll/cave_troll0leg0leg_right0leg_right_top"
+	},
+	"elements": [
+		{
+			"name": "cave_troll0leg0leg_right0leg_right_top",
+			"from": [4, -5.5, 3.5],
+			"to": [12, 5.5, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, -5.5, 3.5]},
+			"faces": {
+				"north": {"uv": [0, 5.5, 4, 11], "texture": "#0"},
+				"east": {"uv": [0, 0, 4.5, 5.5], "texture": "#0"},
+				"south": {"uv": [4, 5.5, 8, 11], "texture": "#0"},
+				"west": {"uv": [4.5, 0, 9, 5.5], "texture": "#0"},
+				"up": {"uv": [12, 10, 8, 5.5], "texture": "#0"},
+				"down": {"uv": [13, 0, 9, 4.5], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# To create new release run:
+#   
+#   git tag [ex. v2.3.0]
+#   git push origin [tag^]
+#
