@@ -5,3 +5,5 @@
 #   git tag [ex. v2.3.0]
 #   git push origin [tag^]
 #
+#   current Version: v1.0.6
+#   current Test: t1.0.0

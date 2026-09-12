@@ -1,0 +1,81 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/red.png",
+      "chars": ["\uE001"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/orange.png",
+      "chars": ["\uE002"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/yellow.png",
+      "chars": ["\uE003"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/green.png",
+      "chars": ["\uE004"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/blue.png",
+      "chars": ["\uE005"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/purple.png",
+      "chars": ["\uE006"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/pink.png",
+      "chars": ["\uE007"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/brown.png",
+      "chars": ["\uE008"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/white.png",
+      "chars": ["\uE009"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/gray.png",
+      "chars": ["\uE010"],
+      "ascent": 8,
+      "height": 17
+    },
+    {
+      "type": "bitmap",
+      "file": "tmep:quests/waypoints/black.png",
+      "chars": ["\uE011"],
+      "ascent": 8,
+      "height": 17
+    }
+  ]
+}

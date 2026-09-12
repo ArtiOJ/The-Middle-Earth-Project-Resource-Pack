@@ -1,0 +1,30 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "one",
+        "dstrgb": "zero",
+        "funca": "add",
+        "srca": "one",
+        "dsta": "zero"
+    },
+    "vertex": "minecraft:block",
+    "fragment": "minecraft:block",
+    "attributes": [
+        "Position",
+        "Color",
+        "UV0",
+        "UV2",
+        "Normal"
+    ],
+    "samplers": [
+        { "name": "Sampler0" }
+    ],
+    "uniforms": [
+        { "name": "ColorModulator", "type": "vec4", "count": 1, "values": [ 1.0, 1.0, 1.0, 1.0 ] },
+        { "name": "FogEnvironmentalStart", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "FogEnvironmentalEnd", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "FogRenderDistanceStart", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "FogRenderDistanceEnd", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "FogColor", "type": "vec4", "count": 1, "values": [ 0.0, 0.0, 0.0, 0.0 ] }
+    ]
+}
