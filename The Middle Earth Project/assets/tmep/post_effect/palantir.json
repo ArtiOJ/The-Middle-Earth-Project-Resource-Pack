@@ -1,0 +1,16 @@
+{
+  "targets": {},
+  "passes": [
+    {
+      "vertex_shader": "tmep:post/palantir",
+      "fragment_shader": "tmep:post/palantir",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "minecraft:main"
+        }
+      ],
+      "output": "minecraft:main"
+    }
+  ]
+}

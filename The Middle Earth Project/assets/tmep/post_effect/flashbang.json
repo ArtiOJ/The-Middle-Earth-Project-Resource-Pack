@@ -1,0 +1,16 @@
+{
+  "targets": {},
+  "passes": [
+    {
+      "vertex_shader": "tmep:post/flashbang",
+      "fragment_shader": "tmep:post/flashbang",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "minecraft:main"
+        }
+      ],
+      "output": "minecraft:main"
+    }
+  ]
+}
