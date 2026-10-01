@@ -66,8 +66,9 @@ void main() {
     ivec2 screen = textureSize(DepthSampler, 0);
     ivec2 pixel = clamp(ivec2(texCoord * vec2(screen)), ivec2(0), screen - 1);
     float depth = water_post_scene_depth(DepthSampler, pixel);
-    float limit = depth > 0.0 ? length(camera_relative(camera, texCoord, depth)) : 1e5;
     vec3 direction = camera_ray(camera, texCoord);
+    bool distantTerrain = depth <= 0.0 && !camera_open_sky(camera, direction, depth, InSampler, pixel);
+    float limit = depth > 0.0 ? length(camera_relative(camera, texCoord, depth)) : (distantTerrain ? 256.0 : 1e5);
     bool hidden = limit < 150.0;
 
     float weight = 0.0;

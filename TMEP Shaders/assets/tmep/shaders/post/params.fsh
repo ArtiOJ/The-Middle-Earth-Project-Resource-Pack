@@ -28,7 +28,19 @@ void main() {
     bool hasPrevious = previousTexel.a > 0.5;
     float previous = hasPrevious ? precise_decode(previousTexel) : 0.0;
     if (!valid) {
-        fragColor = index == SMOOTH_SURFACED ? previousTexel : precise_encode(previous);
+        fragColor = index == SMOOTH_SURFACED || index == SMOOTH_TRANSPARENCY ? previousTexel : precise_encode(previous);
+        return;
+    }
+    if (index == SMOOTH_TRANSPARENCY) {
+        vec3 flag = texelFetch(InSampler, camera_transparency_flag_pixel(cameraScreenSize), 0).rgb;
+        if (all(lessThan(abs(flag - CAMERA_TRANSPARENCY_FLAG), vec3(1.5 / 255.0)))) {
+            fragColor = vec4(0.0, 0.0, 0.0, 1.0);
+        } else if (previousTexel.b > 0.5) {
+            fragColor = previousTexel;
+        } else {
+            fragColor = precise_encode(GameTime);
+            fragColor.b = 1.0;
+        }
         return;
     }
     if (index == SMOOTH_SURFACED) {

@@ -7,6 +7,7 @@
 #include <tmep:atmosphere.glsl>
 #include <tmep:shader_params.glsl>
 
+uniform sampler2D SceneSampler;
 uniform sampler2D InSampler;
 uniform sampler2D CameraSampler;
 uniform sampler2D DepthSampler;
@@ -64,8 +65,10 @@ void main() {
     float facing = max(dot(direction, sun), 0.0);
     vec3 color = raw.rgb;
 
-    if (depth > 0.0 && Haze.x > 0.0) {
-        vec3 point = camera_relative(camera, texCoord, depth);
+    bool distantTerrain = depth <= 0.0 && !camera_open_sky(camera, direction, depth, SceneSampler, pixel);
+    float estimated = direction.y < -0.002 ? min(max(camera_world_origin().y - 63.0, 1.0) / -direction.y, 1200.0) : 1200.0;
+    if ((depth > 0.0 || distantTerrain) && Haze.x > 0.0) {
+        vec3 point = depth > 0.0 ? camera_relative(camera, texCoord, depth) : direction * estimated;
         float distance = length(point);
         vec3 origin = camera_world_origin();
         float amount = atmos_haze_amount(distance, origin.y, origin.y + point.y, state, camera.daytime) * Haze.x;
@@ -78,7 +81,7 @@ void main() {
         float custom = smoothstep(0.08, 0.3, length(biomeFog / biomeLuma - vanillaFog)) * (1.0 - state.rain) * smoothstep(0.02, 0.08, biomeLuma);
         vec3 biomeTint = biomeFog * (dot(hazeDisplay, vec3(0.2126, 0.7152, 0.0722)) / biomeLuma);
         hazeDisplay = mix(hazeDisplay, biomeTint, custom * 0.7);
-        color = mix(color, hazeDisplay, clamp(amount, 0.0, 1.0));
+        color = mix(color, hazeDisplay, clamp(amount, 0.0, distantTerrain ? 0.4 : 1.0));
     }
 
     if (Haze.z > 0.0 && facing > 0.2 && state.sunVisibility > 0.01) {
@@ -97,8 +100,8 @@ void main() {
 
     float regionFog = params_get(ParamsSampler, SMOOTH_FOG_DENSITY);
     if (regionFog > 0.001) {
-        float fogDistance = depth > 0.0 ? length(camera_relative(camera, texCoord, depth)) : 1e4;
-        float amount = depth > 0.0 ? 1.0 - exp(-fogDistance * regionFog * 0.06) : min(regionFog * 1.6, 0.92);
+        float fogDistance = depth > 0.0 ? length(camera_relative(camera, texCoord, depth)) : (distantTerrain ? estimated : 1e4);
+        float amount = depth > 0.0 || distantTerrain ? 1.0 - exp(-fogDistance * regionFog * 0.06) : min(regionFog * 1.6, 0.92);
         float light = mix(0.1, 1.0, state.sunVisibility) * (1.0 - state.rain * 0.35) + state.moonVisibility * 0.05;
         color = mix(color, params_fog_color(ParamsSampler) * light, clamp(amount, 0.0, 1.0));
     }

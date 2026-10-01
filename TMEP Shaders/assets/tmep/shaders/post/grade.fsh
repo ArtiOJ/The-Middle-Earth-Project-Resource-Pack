@@ -16,6 +16,8 @@ uniform sampler2D ExposureSampler;
 uniform sampler2D HeatSampler;
 uniform sampler2D ParamsSampler;
 uniform sampler2D DropletsSampler;
+uniform sampler2D NoticeSampler;
+uniform sampler2D NoticeSmallSampler;
 
 layout(location = 0) in vec2 texCoord;
 
@@ -147,6 +149,16 @@ vec3 ashFall(vec3 color, float amount, float aspect) {
         }
     }
     return color;
+}
+
+vec3 drawNotice(vec3 color, sampler2D notice, vec2 center, float width, float aspect, float strength) {
+    vec2 size = vec2(width, width * aspect * float(textureSize(notice, 0).y) / float(textureSize(notice, 0).x));
+    vec2 local = (texCoord - (center - size * 0.5)) / size;
+    if (strength <= 0.0 || any(lessThan(local, vec2(0.0))) || any(greaterThan(local, vec2(1.0)))) {
+        return color;
+    }
+    vec4 banner = texture(notice, vec2(local.x, 1.0 - local.y));
+    return mix(color, banner.rgb, banner.a * strength);
 }
 
 float droplets(vec2 coord) {
@@ -315,6 +327,13 @@ void main() {
             float height = (floor(cell.r * 255.0 + 0.5) * 256.0 + floor(cell.g * 255.0 + 0.5)) / 128.0 - 64.0;
             color = cell.a > 0.25 ? vec3(clamp((height - 40.0) / 80.0, 0.0, 1.0)) * (cell.a > 0.75 ? vec3(0.6, 1.0, 0.6) : vec3(0.5, 0.7, 1.0)) : vec3(0.15, 0.0, 0.0);
         }
+    }
+    float transparencyOff = params_transparency_off_seconds(ParamsSampler);
+    if (transparencyOff >= 1.5) {
+        float intro = smoothstep(1.5, 2.0, transparencyOff) * (1.0 - smoothstep(9.0, 10.0, transparencyOff));
+        color = drawNotice(color, NoticeSampler, vec2(0.5, 0.62), 0.42, aspect, intro);
+        float corner = smoothstep(9.5, 10.5, transparencyOff);
+        color = drawNotice(color, NoticeSmallSampler, vec2(1.0 - 0.012 - 0.11, 0.97), 0.22, aspect, corner);
     }
     if (Heat.w > 0.5) {
         color = mix(color, vec3(1.0, 0.0, 0.0), clamp(texture(HeatSampler, texCoord).r * 4.0, 0.0, 0.8));

@@ -124,6 +124,73 @@ vec3 camera_sun_direction(Camera camera) {
     return normalize(vec3(-sin(angle), cos(angle) * cos(tilt), cos(angle) * sin(tilt)));
 }
 
+vec3 camera_vanilla_sun_direction(Camera camera) {
+    float timeOfDay = fract(camera.daytime / 24000.0 - 0.25);
+    float smoothed = 0.5 - cos(timeOfDay * 3.14159265) * 0.5;
+    float angle = (timeOfDay * 2.0 + smoothed) / 3.0 * 6.2831853;
+    return vec3(-sin(angle), cos(angle), 0.0);
+}
+
+bool camera_in_celestial_quad(vec3 direction, vec3 axis, float halfSize) {
+    if (axis.y < -0.05 || direction.y < -0.02) {
+        return false;
+    }
+    float along = dot(direction, axis);
+    if (along <= 0.0) {
+        return false;
+    }
+    vec3 tangent = normalize(cross(vec3(0.0, 0.0, 1.0), axis));
+    return abs(direction.z / along) <= halfSize && abs(dot(direction, tangent) / along) <= halfSize;
+}
+
+bool camera_sky_stamped(vec3 color) {
+    return all(equal(uvec3(color * 255.0 + 0.5) & uvec3(7u), uvec3(5u, 2u, 6u)));
+}
+
+vec3 camera_sky_debug(Camera camera, sampler2D scene, ivec2 pixel) {
+    vec4 raw = texelFetch(scene, pixel, 0);
+    return vec3(raw.a > 0.5 / 255.0 ? 1.0 : 0.0, camera_sky_stamped(raw.rgb) ? 1.0 : 0.0, all(lessThan(abs(raw.rgb - camera.fogColor), vec3(2.5 / 255.0))) ? 1.0 : 0.0);
+}
+
+bool camera_open_sky(Camera camera, vec3 direction, float depth, sampler2D scene, ivec2 pixel) {
+    if (depth > 0.0) {
+        return false;
+    }
+    vec4 raw = texelFetch(scene, pixel, 0);
+    if (raw.a > 0.5 / 255.0 || all(lessThan(abs(raw.rgb - camera.fogColor), vec3(2.5 / 255.0)))) {
+        return true;
+    }
+    bool right = camera_sky_stamped(texelFetch(scene, pixel + ivec2(1, 0), 0).rgb);
+    bool left = camera_sky_stamped(texelFetch(scene, pixel - ivec2(1, 0), 0).rgb);
+    bool up = camera_sky_stamped(texelFetch(scene, pixel + ivec2(0, 1), 0).rgb);
+    bool down = camera_sky_stamped(texelFetch(scene, pixel - ivec2(0, 1), 0).rgb);
+    if (camera_sky_stamped(raw.rgb) && (right || left) && (up || down)) {
+        return true;
+    }
+    if (int(right) + int(left) + int(up) + int(down) >= 2) {
+        return true;
+    }
+    const ivec2 wide[8] = ivec2[](ivec2(3, 0), ivec2(-3, 0), ivec2(0, 3), ivec2(0, -3), ivec2(3, 3), ivec2(-3, 3), ivec2(3, -3), ivec2(-3, -3));
+    int around = 0;
+    for (int i = 0; i < 8; i++) {
+        around += int(camera_sky_stamped(texelFetch(scene, pixel + wide[i], 0).rgb));
+    }
+    if (around >= 5) {
+        return true;
+    }
+    bool above = false;
+    bool below = false;
+    for (int step = 2; step <= 6; step += 2) {
+        above = above || camera_sky_stamped(texelFetch(scene, pixel + ivec2(0, step), 0).rgb);
+        below = below || camera_sky_stamped(texelFetch(scene, pixel - ivec2(0, step), 0).rgb);
+    }
+    if (above && below) {
+        return true;
+    }
+    vec3 vanillaSun = camera_vanilla_sun_direction(camera);
+    return camera_in_celestial_quad(direction, vanillaSun, 0.33) || camera_in_celestial_quad(direction, -vanillaSun, 0.23);
+}
+
 bool camera_is_data_pixel(ivec2 pixel) {
     return camera_data_in_strip(pixel, cameraScreenSize);
 }

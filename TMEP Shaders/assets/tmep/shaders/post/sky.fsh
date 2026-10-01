@@ -51,7 +51,11 @@ void main() {
     ivec2 screen = textureSize(DepthSampler, 0);
     vec3 direction = camera_ray(camera, texCoord);
     float limit = depth > 0.0 ? length(camera_relative(camera, texCoord, depth)) : 1e5;
-    bool sky = depth <= 0.0;
+    bool sky = camera_open_sky(camera, direction, depth, InSampler, source);
+    if (Clouds.w > 0.5 && depth <= 0.0) {
+        fragColor = vec4(camera_sky_debug(camera, InSampler, source) * 0.8 + (sky ? vec3(0.0) : vec3(0.2, 0.2, 0.0)), 0.0);
+        return;
+    }
     int steps = int(Clouds.x);
     if (!sky && limit < 150.0) {
         fragColor = vec4(raw.rgb, 0.0);
@@ -92,6 +96,15 @@ void main() {
         color = mix(color, birds.rgb, birds.a);
         color = max(color + rainLayer, vec3(0.0));
         fragColor = vec4(color, (1.0 - clouds.a) * (1.0 - alto.a * 0.8) * (1.0 - overcast.a));
+    } else if (depth <= 0.0) {
+        float height = max(camera_world_origin().y - 63.0, 1.0);
+        float estimated = direction.y < -0.002 ? height / -direction.y : 1e4;
+        float reach = smoothstep(180.0, 900.0, estimated);
+        float night = mix(1.0, mix(0.7, 0.4, reach), state.moonVisibility) * mix(1.0, 0.8, state.rain);
+        vec3 distant = raw.rgb * night;
+        float deckShadow = smoothstep(0.02, 0.45, state.rain) * mix(0.38, 0.55, atmosStorm);
+        vec3 cloudColor = mix(clouds.rgb, vec3(dot(clouds.rgb, vec3(0.2126, 0.7152, 0.0722))), deckShadow) * (1.0 - deckShadow);
+        fragColor = vec4(mix(distant, cloudColor, clouds.a), 0.0);
     } else if (clouds.a > 0.001) {
         float deckShadow = smoothstep(0.02, 0.45, state.rain) * mix(0.38, 0.55, atmosStorm);
         vec3 cloudColor = mix(clouds.rgb, vec3(dot(clouds.rgb, vec3(0.2126, 0.7152, 0.0722))), deckShadow) * (1.0 - deckShadow);

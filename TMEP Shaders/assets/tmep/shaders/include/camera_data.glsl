@@ -40,6 +40,12 @@ bool camera_data_reversed(vec4 color) {
     return round(color.r * 255.0) == 20.0;
 }
 
+const vec3 CAMERA_TRANSPARENCY_FLAG = vec3(51.0, 153.0, 102.0) / 255.0;
+
+ivec2 camera_transparency_flag_pixel(ivec2 size) {
+    return ivec2(2, int(ceil(CAMERA_STRIP_HEIGHT * float(size.y))));
+}
+
 ivec2 camera_data_slot_pixel(int slot, ivec2 size) {
     float x = (float(slot) + 0.5) / float(CAMERA_DATA_SLOTS) * CAMERA_STRIP_WIDTH * float(size.x);
     float y = 0.5 * CAMERA_STRIP_HEIGHT * float(size.y);

@@ -45,12 +45,12 @@
             "height": 1
         },
         "params": {
-            "width": 16,
+            "width": 17,
             "height": 1,
             "persistent": true
         },
         "params_next": {
-            "width": 16,
+            "width": 17,
             "height": 1
         }
     },
@@ -386,6 +386,20 @@
                     "location": "tmep:droplets",
                     "width": 512,
                     "height": 512,
+                    "bilinear": true
+                },
+                {
+                    "sampler_name": "Notice",
+                    "location": "tmep:notice_transparency",
+                    "width": 1024,
+                    "height": 220,
+                    "bilinear": true
+                },
+                {
+                    "sampler_name": "NoticeSmall",
+                    "location": "tmep:notice_transparency_small",
+                    "width": 768,
+                    "height": 88,
                     "bilinear": true
                 }
             ],

@@ -3,6 +3,7 @@
 
 #include <minecraft:oit.glsl>
 #include <tmep:water_depth.glsl>
+#include <tmep:camera_data.glsl>
 
 uniform sampler2D Sampler0;
 uniform sampler2D DepthBoundsSampler;
@@ -21,6 +22,11 @@ float waterFromBounds(vec4 bounds) {
 
 void main() {
     ivec2 pixelCoords = ivec2(gl_FragCoord.xy);
+    if (pixelCoords == camera_transparency_flag_pixel(textureSize(Sampler0, 0))) {
+        fragColor = vec4(CAMERA_TRANSPARENCY_FLAG, 1.0);
+        gl_FragDepth = 1.0;
+        return;
+    }
     vec4 accumulatedColor = texelFetch(Sampler0, pixelCoords, 0);
 
     float sampledTransmittance = sampleTransmittance(pixelCoords, 100000.0f, 1.0);

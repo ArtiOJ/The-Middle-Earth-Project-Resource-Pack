@@ -32,7 +32,8 @@ const int SMOOTH_EMITTER_STRENGTH = 12;
 const int SMOOTH_EMITTER_RADIUS = 13;
 const int SMOOTH_SURFACED = 14;
 const int SMOOTH_RAIN_SCREEN = 15;
-const int SMOOTH_COUNT = 16;
+const int SMOOTH_TRANSPARENCY = 16;
+const int SMOOTH_COUNT = 17;
 
 const int GRADE_NONE = 0;
 const int GRADE_MORDOR = 1;
@@ -45,6 +46,14 @@ const int GRADE_ANGMAR = 6;
 float params_get(sampler2D params, int index) {
     vec4 texel = texelFetch(params, ivec2(index, 0), 0);
     return texel.a > 0.5 ? precise_decode(texel) : 0.0;
+}
+
+float params_transparency_off_seconds(sampler2D params) {
+    vec4 texel = texelFetch(params, ivec2(SMOOTH_TRANSPARENCY, 0), 0);
+    if (texel.b < 0.5) {
+        return -1.0;
+    }
+    return fract(GameTime - precise_decode(texel) + 1.0) * 1200.0;
 }
 
 float params_surfaced_seconds(sampler2D params) {
