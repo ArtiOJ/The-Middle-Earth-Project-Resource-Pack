@@ -188,8 +188,7 @@ bool camera_open_sky(Camera camera, vec3 direction, float depth, sampler2D scene
     if (above && below) {
         return true;
     }
-    vec3 vanillaSun = camera_vanilla_sun_direction(camera);
-    return camera_in_celestial_quad(direction, vanillaSun, 0.33) || camera_in_celestial_quad(direction, -vanillaSun, 0.23);
+    return false;
 }
 
 bool camera_is_data_pixel(ivec2 pixel) {
