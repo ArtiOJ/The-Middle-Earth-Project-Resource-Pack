@@ -149,7 +149,7 @@ bool camera_sky_stamped(vec3 color) {
 
 vec3 camera_sky_debug(Camera camera, sampler2D scene, ivec2 pixel) {
     vec4 raw = texelFetch(scene, pixel, 0);
-    return vec3(raw.a > 0.5 / 255.0 ? 1.0 : 0.0, camera_sky_stamped(raw.rgb) ? 1.0 : 0.0, all(lessThan(abs(raw.rgb - camera.fogColor), vec3(2.5 / 255.0))) ? 1.0 : 0.0);
+    return vec3(raw.a > 0.5 / 255.0 ? 1.0 : 0.0, camera_sky_stamped(raw.rgb) ? 1.0 : 0.0, all(lessThan(abs(raw.rgb - camera.fogColor), vec3(6.0 / 255.0))) ? 1.0 : 0.0);
 }
 
 bool camera_open_sky(Camera camera, vec3 direction, float depth, sampler2D scene, ivec2 pixel) {
@@ -157,7 +157,7 @@ bool camera_open_sky(Camera camera, vec3 direction, float depth, sampler2D scene
         return false;
     }
     vec4 raw = texelFetch(scene, pixel, 0);
-    if (raw.a > 0.5 / 255.0 || all(lessThan(abs(raw.rgb - camera.fogColor), vec3(2.5 / 255.0)))) {
+    if (raw.a > 0.5 / 255.0 || all(lessThan(abs(raw.rgb - camera.fogColor), vec3(6.0 / 255.0)))) {
         return true;
     }
     bool right = camera_sky_stamped(texelFetch(scene, pixel + ivec2(1, 0), 0).rgb);
@@ -182,7 +182,8 @@ bool camera_open_sky(Camera camera, vec3 direction, float depth, sampler2D scene
     bool below = false;
     for (int step = 2; step <= 6; step += 2) {
         above = above || camera_sky_stamped(texelFetch(scene, pixel + ivec2(0, step), 0).rgb);
-        below = below || camera_sky_stamped(texelFetch(scene, pixel - ivec2(0, step), 0).rgb);
+        vec3 under = texelFetch(scene, pixel - ivec2(0, step), 0).rgb;
+        below = below || camera_sky_stamped(under) || all(lessThan(abs(under - camera.fogColor), vec3(6.0 / 255.0)));
     }
     if (above && below) {
         return true;

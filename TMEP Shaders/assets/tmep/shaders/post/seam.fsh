@@ -22,7 +22,7 @@ int seamClass(Camera camera, ivec2 pixel, ivec2 screen) {
         return length(camera_relative(camera, uv, depth)) > 64.0 ? 1 : 0;
     }
     vec4 raw = texelFetch(SceneSampler, pixel, 0);
-    if (raw.a > 0.5 / 255.0 || camera_sky_stamped(raw.rgb) || all(lessThan(abs(raw.rgb - camera.fogColor), vec3(2.5 / 255.0)))) {
+    if (raw.a > 0.5 / 255.0 || camera_sky_stamped(raw.rgb) || all(lessThan(abs(raw.rgb - camera.fogColor), vec3(6.0 / 255.0)))) {
         return 0;
     }
     return 2;
