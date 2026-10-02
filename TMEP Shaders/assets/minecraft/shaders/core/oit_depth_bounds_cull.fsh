@@ -14,7 +14,7 @@ void main() {
     ivec2 pixelCoords = ivec2(gl_FragCoord.xy);
     vec4 depthBounds = texelFetch(DepthBoundsSampler, pixelCoords, 0);
 
-    if (depthBounds.a > 1.5) {
+    if (water_bounds_marked(depthBounds.a)) {
         fragColor = depthBounds;
         gl_FragDepth = 0.0;
         return;

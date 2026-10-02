@@ -3,7 +3,7 @@
 
 const float WATER_DEPTH_RANGE = 12.0;
 const float WATER_DEPTH_FLAG_SCALE = 1048576.0;
-const float WATER_DEPTH_DEEP_MARK = 2.0;
+const float WATER_DEPTH_DEEP_MARK = 1.0e-6;
 
 float water_depth_threshold(ivec2 pixel) {
     const int bayer[16] = int[](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);
@@ -12,7 +12,15 @@ float water_depth_threshold(ivec2 pixel) {
     return WATER_DEPTH_RANGE * f * f;
 }
 
-const float WATER_DEPTH_UNDERSIDE_MARK = 3.0;
+const float WATER_DEPTH_UNDERSIDE_MARK = 2.0e-6;
+
+bool water_bounds_marked(float a) {
+    return a > 0.5e-6 && a < 3.0e-6;
+}
+
+bool water_bounds_underside(float a) {
+    return a > 1.5e-6 && a < 3.0e-6;
+}
 
 float water_depth_mark_flag(float deviceDepth, float flag) {
     return (floor(deviceDepth * WATER_DEPTH_FLAG_SCALE) + flag) / WATER_DEPTH_FLAG_SCALE;

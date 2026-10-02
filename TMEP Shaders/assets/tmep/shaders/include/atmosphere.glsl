@@ -15,6 +15,8 @@ const vec3 ATMOS_TWILIGHT_ZENITH = vec3(0.045, 0.03, 0.15);
 const vec3 ATMOS_TWILIGHT_MID = vec3(0.42, 0.14, 0.34);
 const vec3 ATMOS_TWILIGHT_SUN = vec3(1.5, 0.55, 0.14);
 const vec3 ATMOS_TWILIGHT_AWAY = vec3(0.36, 0.2, 0.38);
+const vec3 ATMOS_TWILIGHT_AWAY_MID = vec3(0.06, 0.06, 0.17);
+const vec3 ATMOS_EARTH_SHADOW = vec3(0.03, 0.035, 0.085);
 const float ATMOS_SKY_VARIATION = 0.08;
 const float ATMOS_REGION_SCALE = 0.00012;
 const float ATMOS_HALO = 0.22;
@@ -31,9 +33,6 @@ const vec3 ATMOS_DAWN_ZENITH = vec3(0.03, 0.055, 0.17);
 const vec3 ATMOS_DAWN_MID = vec3(0.34, 0.22, 0.36);
 const vec3 ATMOS_DAWN_SUN = vec3(1.3, 0.78, 0.38);
 const vec3 ATMOS_DAWN_AWAY = vec3(0.2, 0.23, 0.36);
-const vec3 ATMOS_EARTH_SHADOW = vec3(0.06, 0.07, 0.14);
-const vec3 ATMOS_VENUS_BELT = vec3(0.36, 0.16, 0.3);
-const float ATMOS_ANTISUN_DARKNESS = 0.85;
 const float ATMOS_CIRRUS_HEIGHT = 700.0;
 const float ATMOS_CIRRUS_COVERAGE = 0.56;
 const float ATMOS_CIRRUS_OPACITY = 0.5;
@@ -175,6 +174,43 @@ float atmos_region_alto(vec2 xz, float time) {
     return smoothstep(0.46, 0.64, atmos_fbm(atmos_region_point(xz, time) * 1.1 + 21.9, 3));
 }
 
+float atmos_azimuth_away(vec3 direction, vec3 sun) {
+    vec3 flatSun = vec3(sun.x, 0.0, sun.z) / max(length(sun.xz), 1e-4);
+    return 1.0 - smoothstep(-0.85, 0.35, dot(direction, flatSun));
+}
+
+float atmos_away_smooth(vec3 direction, vec3 sun) {
+    vec3 flatSun = vec3(sun.x, 0.0, sun.z) / max(length(sun.xz), 1e-4);
+    return pow(clamp(0.5 - 0.5 * dot(direction, flatSun), 0.0, 1.0), 1.3);
+}
+
+float atmos_dusk_progress(vec3 sun) {
+    return 1.0 - smoothstep(-0.16, 0.1, sun.y);
+}
+
+float atmos_night_dome(vec3 direction, vec3 sun) {
+    float progress = atmos_dusk_progress(sun);
+    if (progress <= 0.0) {
+        return 0.0;
+    }
+    vec3 antiFlat = -vec3(sun.x, 0.0, sun.z) / max(length(sun.xz), 1e-4);
+    float angle = acos(clamp(dot(direction, antiFlat), -1.0, 1.0));
+    return pow(1.0 - smoothstep(0.0, mix(0.8, 2.4, progress), angle), 0.8) * smoothstep(0.0, 0.2, progress);
+}
+
+float atmos_horizon_shadow(vec3 direction, vec3 sun) {
+    return pow(1.0 - smoothstep(0.0, 0.35, max(direction.y, 0.0)), 1.5) * pow(atmos_away_smooth(direction, sun), 0.7) * smoothstep(0.0, 0.25, atmos_dusk_progress(sun));
+}
+
+float atmos_earth_shadow(vec3 direction, vec3 sun) {
+    return 1.0 - (1.0 - atmos_night_dome(direction, sun) * mix(0.7, 0.97, atmos_dusk_progress(sun))) * (1.0 - atmos_horizon_shadow(direction, sun) * 0.92);
+}
+
+vec3 atmos_shadow_tint(vec3 color, float amount) {
+    float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
+    return mix(color, vec3(0.55, 0.62, 0.95) * luma * 0.5, amount);
+}
+
 vec3 atmos_sky_detail(vec3 direction, vec3 sun, LightState state, bool variation) {
     float up = clamp(direction.y, 0.0, 1.0);
     float day = smoothstep(-0.12, 0.08, sun.y);
@@ -188,15 +224,13 @@ vec3 atmos_sky_detail(vec3 direction, vec3 sun, LightState state, bool variation
     dayColor = mix(dayColor, vec3(1.25, 1.15, 1.0) * dot(ATMOS_HORIZON_DAY, vec3(0.2126, 0.7152, 0.0722)), pow(max(facing, 0.0), 6.0) * 0.35);
     float dawn = smoothstep(-0.15, 0.15, sun.x);
     vec3 zenithTwilight = mix(ATMOS_TWILIGHT_ZENITH, ATMOS_DAWN_ZENITH, dawn);
-    vec3 midTwilight = mix(ATMOS_TWILIGHT_MID, ATMOS_DAWN_MID, dawn);
+    float awaySmooth = atmos_away_smooth(direction, sun);
+    vec3 midTwilight = mix(ATMOS_TWILIGHT_AWAY_MID, mix(ATMOS_TWILIGHT_MID, ATMOS_DAWN_MID, dawn), pow(1.0 - awaySmooth, 0.8));
     vec3 sunTwilight = mix(ATMOS_TWILIGHT_SUN * tint / max(tint.r, 1e-3), ATMOS_DAWN_SUN, dawn);
-    vec3 awayTwilight = mix(ATMOS_TWILIGHT_AWAY, ATMOS_DAWN_AWAY, dawn);
+    vec3 awayTwilight = mix(mix(ATMOS_TWILIGHT_AWAY, ATMOS_DAWN_AWAY, dawn) * 0.75, ATMOS_TWILIGHT_AWAY_MID * 1.4, smoothstep(-0.02, 0.06, 0.04 - sun.y));
     vec3 twilightHorizon = mix(awayTwilight, sunTwilight, towardSun);
     vec3 twilight = mix(mix(zenithTwilight, midTwilight, smoothstep(0.0, 0.65, gradient)), twilightHorizon, smoothstep(0.45, 1.0, gradient));
-    float away = smoothstep(0.2, -0.7, facing) * (1.0 - smoothstep(0.0, 0.3, sun.y));
-    vec3 antisun = mix(ATMOS_EARTH_SHADOW, ATMOS_VENUS_BELT, smoothstep(0.0, 0.1, up));
-    antisun = mix(antisun, zenithTwilight, smoothstep(0.12, 0.6, up));
-    twilight = mix(twilight, antisun, away * ATMOS_ANTISUN_DARKNESS);
+    twilight *= mix(1.0, 0.55, awaySmooth * (1.0 - smoothstep(0.1, 0.3, sun.y)));
     twilight *= mix(0.25, 1.0, smoothstep(-0.2, 0.02, sun.y));
     vec3 night = mix(ATMOS_ZENITH_NIGHT, ATMOS_HORIZON_NIGHT, gradient);
 
@@ -209,7 +243,13 @@ vec3 atmos_sky_detail(vec3 direction, vec3 sun, LightState state, bool variation
 
     float angle = acos(clamp(facing, -1.0, 1.0));
     float visible = smoothstep(-0.1, 0.05, sun.y);
-    sky += tint * (exp(-angle * ATMOS_SUN_HALO) * (0.2 + 1.0 * low) + exp(-angle * 2.5) * (0.04 + 0.35 * low)) * ATMOS_SUN_GLOW * visible;
+    sky += tint * (exp(-angle * ATMOS_SUN_HALO) * (0.2 + 1.0 * low) + exp(-angle * 2.5) * 0.04 + exp(-angle * 1.4) * 0.9 * low) * ATMOS_SUN_GLOW * visible;
+    float earthShadow = atmos_earth_shadow(direction, sun);
+    if (earthShadow > 0.0) {
+        float deepest = max(atmos_night_dome(direction, sun), atmos_horizon_shadow(direction, sun));
+        vec3 shadowColor = ATMOS_EARTH_SHADOW * mix(1.3, 0.45, atmos_dusk_progress(sun)) * mix(1.0, 0.6, deepest);
+        sky = mix(sky, min(sky, shadowColor), earthShadow);
+    }
     sky = mix(sky, sky * 0.5, smoothstep(0.0, 0.25, -direction.y));
     float gray = dot(sky, vec3(0.2126, 0.7152, 0.0722));
     sky = mix(sky, vec3(gray) * vec3(0.95, 1.0, 1.05) * 0.8, state.rain * mix(0.35, 0.85, atmosStorm));
@@ -315,7 +355,7 @@ vec3 atmos_stars(vec3 direction, vec3 sun, float time) {
 vec3 atmos_celestial(vec3 direction, vec3 sun, LightState state) {
     vec3 tint = atmos_sun_tint(state);
     float sunCos = cos(radians(ATMOS_SUN_SIZE));
-    float night = smoothstep(-0.02, 0.12, -sun.y);
+    float night = max(smoothstep(-0.02, 0.12, -sun.y), (1.0 - smoothstep(-0.06, 0.06, sun.y)) * atmos_azimuth_away(direction, sun) * 0.6);
     float sunDisc = smoothstep(sunCos - (1.0 - sunCos) * 0.5, sunCos, dot(direction, sun)) * smoothstep(-0.05, 0.02, sun.y);
     vec3 moon = -sun;
     float moonFacing = dot(direction, moon);

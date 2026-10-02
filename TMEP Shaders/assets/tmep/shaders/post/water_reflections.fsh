@@ -25,6 +25,8 @@ const int OCCLUDER_OFFSETS[5] = int[](0, 2, -2, 4, -4);
 float reflectionOriginDistance = 0.0;
 float reflectionNearestDistance = 0.0;
 
+float reflectionOriginHorizontal = 0.0;
+
 float sceneBehind(Camera camera, vec2 uv, vec3 point, ivec2 screen, out bool usable) {
     ivec2 center = clamp(ivec2(uv * vec2(screen)), ivec2(0), screen - 1);
     float pointDistance = length(point);
@@ -41,7 +43,7 @@ float sceneBehind(Camera camera, vec2 uv, vec3 point, ivec2 screen, out bool usa
             return -1e9;
         }
         float sceneDistance = length(scenePoint);
-        if (sceneDistance < reflectionOriginDistance * 0.9 || sceneDistance < reflectionNearestDistance) {
+        if (sceneDistance < reflectionOriginDistance * 0.9 || sceneDistance < reflectionNearestDistance || length(scenePoint.xz) < reflectionOriginHorizontal - 0.3) {
             return -1e9;
         }
         if (sceneDistance > pointDistance * 0.5 || i == 4) {
@@ -66,6 +68,7 @@ void main() {
     ivec2 screen = textureSize(DepthSampler, 0);
     float depth = water_post_scene_depth(DepthSampler, pixel);
     vec3 origin = camera_relative(camera, texCoord, depth);
+    reflectionOriginHorizontal = length(origin.xz);
     float distance = length(origin);
     reflectionOriginDistance = distance;
     vec3 viewDirection = origin / distance;

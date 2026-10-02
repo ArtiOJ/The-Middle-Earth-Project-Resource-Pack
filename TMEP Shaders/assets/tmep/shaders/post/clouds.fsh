@@ -47,6 +47,7 @@ vec4 traceClouds(Camera camera, vec3 direction, float limit, int steps) {
     }
     vec4 clouds = vec4(puffs.rgb + towers.rgb * (1.0 - puffs.a), puffs.a + towers.a * (1.0 - puffs.a));
     clouds.rgb += atmos_cloud_optics(direction, sun, state, clouds.a) * clouds.a;
+    clouds.rgb = atmos_shadow_tint(clouds.rgb, atmos_earth_shadow(direction, sun) * 0.85);
     if (clouds.a <= 0.001) {
         return vec4(0.0);
     }

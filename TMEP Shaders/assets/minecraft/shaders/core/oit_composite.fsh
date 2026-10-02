@@ -17,7 +17,7 @@ float waterFromBounds(vec4 bounds) {
     #ifndef RENDERPEARL_DEPTH_IS_ZERO_TO_ONE
     waterDeviceDepth = waterDeviceDepth * 0.5 + 0.5;
     #endif
-    return water_depth_mark_flag(clamp(waterDeviceDepth, 0.0, 1.0), bounds.a > 2.5 ? 0.75 : 0.5);
+    return water_depth_mark_flag(clamp(waterDeviceDepth, 0.0, 1.0), water_bounds_underside(bounds.a) ? 0.75 : 0.5);
 }
 
 void main() {
@@ -45,21 +45,21 @@ void main() {
 
     vec4 bounds = texelFetch(DepthBoundsSampler, pixelCoords, 0);
     float closestBoundDeviceDepth = bounds.b;
-    if (!water_depth_is_water(closestBoundDeviceDepth) && bounds.a > 1.5) {
+    if (!water_depth_is_water(closestBoundDeviceDepth) && water_bounds_marked(bounds.a)) {
         closestBoundDeviceDepth = waterFromBounds(bounds);
     }
     bool nearWater = bounds.b <= 0.0 && !water_depth_is_water(closestBoundDeviceDepth);
     if (!nearWater && !water_depth_is_water(closestBoundDeviceDepth)) {
         const ivec2 probes[4] = ivec2[](ivec2(2, 0), ivec2(-2, 0), ivec2(0, 2), ivec2(0, -2));
         for (int i = 0; i < 4; i++) {
-            nearWater = nearWater || texelFetch(DepthBoundsSampler, pixelCoords + probes[i], 0).a > 1.5;
+            nearWater = nearWater || water_bounds_marked(texelFetch(DepthBoundsSampler, pixelCoords + probes[i], 0).a);
         }
     }
     if (nearWater) {
         for (int y = -2; y <= 2; y++) {
             for (int x = -2; x <= 2; x++) {
                 vec4 candidate = texelFetch(DepthBoundsSampler, pixelCoords + ivec2(x, y), 0);
-                if (candidate.a > 1.5) {
+                if (water_bounds_marked(candidate.a)) {
                     float candidateDepth = water_depth_is_water(candidate.b) ? candidate.b : waterFromBounds(candidate);
                     if (!water_depth_is_water(closestBoundDeviceDepth) || candidateDepth > closestBoundDeviceDepth) {
                         closestBoundDeviceDepth = candidateDepth;
@@ -74,7 +74,7 @@ void main() {
             float found = -1.0;
             for (int i = 0; i < 8; i++) {
                 vec4 candidate = texelFetch(DepthBoundsSampler, pixelCoords + directions[i] * ring * 3, 0);
-                if (candidate.a > 1.5 && water_depth_is_water(candidate.b)) {
+                if (water_bounds_marked(candidate.a) && water_depth_is_water(candidate.b)) {
                     found = max(found, candidate.b);
                 }
             }

@@ -24,7 +24,7 @@ float waterMeasuredThickness(float surfaceLinearDepth) {
                 continue;
             }
             samples++;
-            if (bounds.a > 1.5) {
+            if (water_bounds_marked(bounds.a)) {
                 lower = max(lower, threshold);
             } else {
                 upper = min(upper, threshold);
