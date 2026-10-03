@@ -1,137 +1,138 @@
 {
   "providers": [
     {
+      "type": "space",
+      "advances": {
+        "\uE000": -1,
+        "\uE001": -2,
+        "\uE002": -4,
+        "\uE003": -8,
+        "\uE004": -16,
+        "\uE005": -32,
+        "\uE006": -64,
+        "\uE007": -128,
+        "\uE008": -256,
+        "\uE009": -512,
+
+        "\uE010": 1,
+        "\uE011": 2,
+        "\uE012": 4,
+        "\uE013": 8,
+        "\uE014": 16,
+        "\uE015": 32,
+        "\uE016": 64,
+        "\uE017": 128,
+        "\uE018": 256,
+        "\uE019": 512
+      }
+    },
+    {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/red.png",
+      "file": "tmep:quests/waypoints/red.png",
       "chars": ["\uE100"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/orange.png",
+      "file": "tmep:quests/waypoints/orange.png",
       "chars": ["\uE101"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/yellow.png",
+      "file": "tmep:quests/waypoints/yellow.png",
       "chars": ["\uE102"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/green.png",
+      "file": "tmep:quests/waypoints/green.png",
       "chars": ["\uE103"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/blue.png",
+      "file": "tmep:quests/waypoints/blue.png",
       "chars": ["\uE104"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/purple.png",
+      "file": "tmep:quests/waypoints/purple.png",
       "chars": ["\uE105"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/pink.png",
+      "file": "tmep:quests/waypoints/pink.png",
       "chars": ["\uE106"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/brown.png",
+      "file": "tmep:quests/waypoints/brown.png",
       "chars": ["\uE107"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/white.png",
+      "file": "tmep:quests/waypoints/white.png",
       "chars": ["\uE108"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/gray.png",
+      "file": "tmep:quests/waypoints/gray.png",
       "chars": ["\uE109"],
       "ascent": 8,
       "height": 17
     },
     {
       "type": "bitmap",
-      "file": "tmep:quest/waypoints/black.png",
+      "file": "tmep:quests/waypoints/black.png",
       "chars": ["\uE10A"],
       "ascent": 8,
       "height": 17
     },
 
+
+
     {
       "type": "bitmap",
       "file": "tmep:gui/mana/bar_empty.png",
       "chars": ["\uE200"],
-      "ascent": -30,
-      "height": 6
+      "ascent": 8,
+      "height": 9
     },
     {
       "type": "bitmap",
       "file": "tmep:gui/mana/fill_1.png",
       "chars": ["\uE201"],
-      "ascent": -30,
-      "height": 6
+      "ascent": 2,
+      "height": 3
     },
     {
       "type": "bitmap",
       "file": "tmep:gui/mana/fill_2.png",
       "chars": ["\uE202"],
-      "ascent": -30,
-      "height": 6
+      "ascent": 2,
+      "height": 3
     },
     {
       "type": "bitmap",
       "file": "tmep:gui/mana/fill_3.png",
       "chars": ["\uE203"],
-      "ascent": -30,
-      "height": 6
-    },
-
-    {
-      "type": "space",
-      "advances": {
-        "\uE800": -1,
-        "\uE801": -2,
-        "\uE802": -4,
-        "\uE803": -8,
-        "\uE804": -16,
-        "\uE805": -32,
-        "\uE806": -64,
-        "\uE807": -128,
-        "\uE808": -256,
-        "\uE809": -512,
-
-        "\uE810": 1,
-        "\uE811": 2,
-        "\uE812": 4,
-        "\uE813": 8,
-        "\uE814": 16,
-        "\uE815": 32,
-        "\uE816": 64,
-        "\uE817": 128,
-        "\uE818": 256,
-        "\uE819": 512
-      }
+      "ascent": 2,
+      "height": 3
     }
   ]
 }
