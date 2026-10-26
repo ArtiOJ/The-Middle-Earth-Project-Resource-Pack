@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "tmep:item/entity/cave_troll/cave_troll0leg0leg_left0leg_left_bottom",
-		"particle": "tmep:item/entity/cave_troll/cave_troll0leg0leg_left0leg_left_bottom"
+		"0": "tmep:item/entity/cave_troll/leg_left_bottom",
+		"particle": "tmep:item/entity/cave_troll/leg_left_bottom"
 	},
 	"elements": [
 		{
